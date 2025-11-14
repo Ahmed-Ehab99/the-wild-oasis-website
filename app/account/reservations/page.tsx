@@ -1,6 +1,7 @@
 import { auth } from "@/lib/auth";
 import { getBookings } from "@/lib/data-service";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import ReservationList from "./_components/ReservationList";
 
 export const metadata = {
@@ -9,6 +10,8 @@ export const metadata = {
 
 const ReservationsPage = async () => {
   const session = await auth();
+  if (!session) redirect("/login");
+  
   const bookings = await getBookings(session?.user?.id as string);
 
   return (

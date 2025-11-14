@@ -1,5 +1,3 @@
-"use cache";
-
 import { getCabins } from "@/lib/data-service";
 import image1 from "@/public/about-1.jpg";
 import image2 from "@/public/about-2.jpg";
