@@ -9,7 +9,7 @@ import {
   isWithinInterval,
 } from "date-fns";
 import { DateRange, DayPicker } from "react-day-picker";
-import "react-day-picker/dist/style.css";
+import "react-day-picker/style.css";
 
 function isAlreadyBooked(range: DateRange, datesArr: Date[]): boolean {
   return (
@@ -47,15 +47,15 @@ const DateSelector = ({ settings, bookedDates, cabin }: DateSelectorProps) => {
   return (
     <div className="flex flex-col justify-between">
       <DayPicker
-        className="place-self-center pt-12"
+        className="rdp-custom pt-8"
         mode="range"
         onSelect={setRange}
         selected={displayRange}
         min={(minBookingLength ?? 0) + 1}
         max={maxBookingLength ?? 0}
-        fromMonth={new Date()}
+        startMonth={new Date()}
         fromDate={new Date()}
-        toYear={new Date().getFullYear() + 5}
+        endMonth={new Date(new Date().getFullYear() + 5, 11)}
         captionLayout="dropdown"
         numberOfMonths={2}
         disabled={(curDate) =>
