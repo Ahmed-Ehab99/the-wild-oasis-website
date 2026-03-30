@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Josefin_Sans } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 import Header from "../components/Header";
 import { ReservationProvider } from "../context/ReservationContext";
 import "./globals.css";
-import { Toaster } from "react-hot-toast";
 
 const josefinSans = Josefin_Sans({
   display: "swap",
@@ -26,7 +26,7 @@ const RootLayout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${josefinSans.className} bg-primary-950 text-primary-100 relative flex min-h-screen flex-col antialiased`}
       >
