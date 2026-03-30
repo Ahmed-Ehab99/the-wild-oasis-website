@@ -1,0 +1,22 @@
+name: Keep Supabase Active
+
+on:
+  schedule:
+    # Runs every 5 days at 00:00 UTC
+    - cron: '0 0 */5 * *'
+  workflow_dispatch:  # Allows manual trigger from Actions tab
+
+jobs:
+  keep-alive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase Database
+        run: |
+          curl -X GET "${{ secrets.SUPABASE_URL }}/rest/v1/guestes?select=count()&limit=1" \
+            -H "apikey: ${{ secrets.SUPABASE_KEY }}" \
+            -H "Accept: application/json" \
+            -v
+        continue-on-error: true
+
+      - name: Log Result
+        run: echo "✅ Supabase keep-alive check completed"
