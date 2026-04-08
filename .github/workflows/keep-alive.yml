@@ -3,8 +3,8 @@ name: Keep Supabase Active
 on:
   schedule:
     # Runs every 5 days at 00:00 UTC
-    - cron: '0 0 */5 * *'
-  workflow_dispatch:  # Allows manual trigger from Actions tab
+    - cron: "0 0 */5 * *"
+  workflow_dispatch: # Allows manual trigger from Actions tab
 
 jobs:
   keep-alive:
@@ -12,8 +12,9 @@ jobs:
     steps:
       - name: Ping Supabase Database
         run: |
-          curl -X GET "${{ secrets.SUPABASE_URL }}/rest/v1/guestes?select=count()&limit=1" \
+          curl -X GET "${{ secrets.SUPABASE_URL }}/rest/v1/guests?select=count()&limit=1" \
             -H "apikey: ${{ secrets.SUPABASE_KEY }}" \
+            -H "Content-Type: application/json" \
             -H "Accept: application/json" \
             -v
         continue-on-error: true
